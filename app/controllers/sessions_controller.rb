@@ -1,11 +1,18 @@
 class SessionsController < ApplicationController
   def create
-    puts params
-    # puts env['omniauth.auth'].to_yaml #env["omniauth.auth"] is what we get returned as a response...
+    auth_data = env['omniauth.auth']
+    uid = auth_data.uid
+
+    @user = User.find_by uid: uid
+
+    unless @user
+      @user = User.create_new_user(auth_data)
+    end
+
+    puts @user.username
     
-    session[:user_id] = user.id
+    session[:user_id] = @user.id
     redirect_to root_url, notice: "Signed in!"
-    
   end
   
   def destroy
