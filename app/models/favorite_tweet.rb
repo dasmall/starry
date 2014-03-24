@@ -1,4 +1,5 @@
 class FavoriteTweet < ActiveRecord::Base
+  validates_uniqueness_of :status_id
   def self.create_new_favorite(tweet_data, user_id)
     @favorite = FavoriteTweet.new(
       :text => tweet_data.text,
