@@ -32,8 +32,11 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'less-rails'
+gem 'therubyracer'
+
 gem 'haml-rails'
-gem 'twitter'
+gem 'twitter', '5.0.0.rc.1'
 gem 'omniauth-twitter'
 
 # Use ActiveModel has_secure_password
