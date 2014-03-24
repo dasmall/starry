@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140324085105) do
+ActiveRecord::Schema.define(version: 20140324092728) do
+
+  create_table "favorite_tweets", force: true do |t|
+    t.text     "text"
+    t.string   "status_id"
+    t.datetime "date_posted"
+    t.string   "user"
+    t.text     "raw_data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "favorites", force: true do |t|
     t.string   "text"
