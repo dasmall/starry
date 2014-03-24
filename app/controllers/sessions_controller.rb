@@ -8,8 +8,6 @@ class SessionsController < ApplicationController
     unless @user
       @user = User.create_new_user(auth_data)
     end
-
-    puts @user.username
     
     session[:user_id] = @user.id
     redirect_to root_url, notice: "Signed in!"

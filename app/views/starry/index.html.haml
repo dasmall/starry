@@ -1,4 +1,12 @@
 %h1 Starry#index
-%p Find me in app/views/starry/index.html.haml
-%a(href="/auth/twitter/")
-  Login to Twitter
+%i
+  Because everyone has favorites.
+%br/
+-if not @user
+  %a(href="/auth/twitter/")
+    Login with Twitter
+-else
+  %a(href="/starry/import/favorites")
+    Import Favorites
+  %a(href="/sessions/destroy")
+    Logout (@#{@user.username})
