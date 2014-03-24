@@ -17,7 +17,7 @@ class StarryController < ApplicationController
         config.access_token        = @user.access_token
         config.access_token_secret = @user.access_token_secret
       end
-      puts client.status(447904129692999680).to_json
+      puts client.favorites({:max_id => 447421699105906688, :count => 1})[0].to_json
     end
   end
 
