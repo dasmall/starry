@@ -1,12 +1,16 @@
 %h1 Starry#index
-%i
-  Because everyone has favorites.
-%br/
+%div
+  %i
+    Because everyone has favorites.
+%ul
 -if not @user
-  %a(href="/auth/twitter/")
-    Login with Twitter
+  %li
+    %a(href="/auth/twitter/")
+      Login with Twitter
 -else
-  %a(href="/starry/import/favorites")
-    Import Favorites
-  %a(href="/sessions/destroy")
-    Logout (@#{@user.username})
+  %li
+    %a(href="favorites/import")
+      Import Favorites
+  %li
+    %a(href="/sessions/destroy")
+      Logout (@#{@user.username})
