@@ -19,14 +19,18 @@ class StarryController < ApplicationController
         config.access_token        = @user.access_token
         config.access_token_secret = @user.access_token_secret
       end
-      most_recent_favorite = FavoriteTweet.where(user: @user.id).order(date_posted: :desc).first
-      puts most_recent_favorite
+      most_recent_favorite = FavoriteTweet.where(user: @user.id).order(date_posted: :asc).first
+      
+      puts most_recent_favorite.to_json
+
       if most_recent_favorite
-        search_options.max_id = most_recent_favorite.staus_id
+        search_options[:max_id] = most_recent_favorite.status_id.to_i - 1
       end
+
       # TODO query until all favorites retrieved
       # TODO change query to first get most recent tweets, then tweets before
       # the last returned favorite in each batch
+      
       user_favorites = client.favorites(search_options)
       user_favorites.each do |favorite_data|
         FavoriteTweet.create_new_favorite favorite_data, session[:user_id]
