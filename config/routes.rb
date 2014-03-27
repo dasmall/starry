@@ -8,7 +8,7 @@ Starry::Application.routes.draw do
   root :to => 'starry#index'
 
   get 'auth/:provider/callback' => 'sessions#create'
-  get 'favorites/import' => 'starry#get_faves'
+  get 'favorites/:import_type' => 'starry#get_faves'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
