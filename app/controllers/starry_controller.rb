@@ -1,5 +1,5 @@
 class StarryController < ApplicationController
-  TWITTER_RESULT_COUNT = 100.freeze
+  TWITTER_RESULT_COUNT = 200.freeze
   def index
     if session[:user_id]
       @user = User.find_by id: session[:user_id]
