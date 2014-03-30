@@ -14,30 +14,28 @@ class StarryController < ApplicationController
       @user = User.find_by id: session[:user_id]
       client = setup_twitter_client
 
-      search_options = setup_search_params
+      last_id = nil
       favorites = []
 
       i = 0
+      # Grab up to most recent 1000 favorites
       for i in 0..5
+        search_options = setup_search_params(last_id)
         results = client.favorites(search_options)
-
-        # No results returned. Exit loop.
-        if results.empty?
-          break
-        end
 
         new_favorites = get_new_favorites(results)
         
         favorites.concat new_favorites
 
-        if new_favorites.length != results.length
+        # Duplicate favorites returned / No favorites returned.
+        # No need to request more.
+        if results.empty? or (new_favorites.length <= results.length)
           break
         end
 
         i += 1
-
         last_id = results.last.id
-        search_options = setup_search_params(last_id)
+
       end
 
       # Reverse order for most recent tweet to be stored last
@@ -47,6 +45,13 @@ class StarryController < ApplicationController
         FavoriteTweet.create_new_favorite favorite_data, session[:user_id]
       end
     end
+  end
+
+  def show_faves
+    if session[:user_id]
+      @user = User.find_by id: session[:user_id]
+    end
+    @faves = FavoriteTweet.where(:user => @user.id).order(:date_posted => :desc)
   end
 
   def signin
@@ -60,8 +65,8 @@ class StarryController < ApplicationController
   def get_new_favorites(favorites)
     favorites.each_with_index do |fave, i|
       existing_favorite = FavoriteTweet.find_by status_id: fave.id
-      puts existing_favorite
       if existing_favorite
+        # Return only array of new favorites.
         return new_favorites = favorites.slice(0, i)
         break
       end
