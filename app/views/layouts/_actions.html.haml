@@ -1,0 +1,19 @@
+%ul
+-if not @user
+  %li
+    %a(href="/auth/twitter/")
+      Login with Twitter
+-else
+  %li= link_to('Home', '/' )
+  %li
+    %a(href="/favorites")
+      Show Favorites
+  %li
+    %a(href="/favorites/import")
+      Import Favorites
+  %li
+    %a(href="/favorites/update")
+      Update Favorites
+  %li
+    %a(href="/sessions/destroy")
+      Logout (@#{@user.username})
