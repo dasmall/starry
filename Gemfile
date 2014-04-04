@@ -34,6 +34,7 @@ end
 
 gem 'less-rails'
 gem 'therubyracer'
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 
 gem 'haml-rails'
 gem 'twitter', '5.0.0.rc.1'
