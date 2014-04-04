@@ -1,4 +1,15 @@
-%h1 Starry#index
-%div
-  %i
-    Because everyone has favorites.
+-if @user
+  - if defined? @random_favorites and @random_favorites.length
+    - @random_favorites.each do |fave|
+      %p
+        = fave.text
+        %small
+          - username = JSON.parse(fave.raw_data)['user']['screen_name']
+          %a( href= "https://twitter.com/#{username}/status/#{fave.status_id}" target="_blank" )
+            \- @#{username}
+  - else
+    %p
+      Get to starring some tweets and we'll show you some here!
+- else
+  %h3
+    Welcome

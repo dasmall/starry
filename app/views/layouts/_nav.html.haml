@@ -1,0 +1,12 @@
+= nav_bar :brand => "Starry", :static => :top, :brand_link => "/", :responsive => true do
+  = menu_group :pull => :right do
+    / = menu_item "Home", "/"
+    = menu_item "About"
+    - if @user
+      = menu_item "Favorites", "/favorites"
+      = drop_down @user.username do
+        = menu_item "Account Settings"
+        = menu_item "Logout", "/sessions/destroy"
+    - else
+      = menu_item "Login", "auth/twitter"
+.clearfix 

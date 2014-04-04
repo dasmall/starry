@@ -1,8 +1,10 @@
 class StarryController < ApplicationController
   TWITTER_RESULT_COUNT = 200.freeze
   def index
+    puts 'hi'
     if session[:user_id]
       @user = User.find_by id: session[:user_id]
+      @random_favorites = FavoriteTweet.random_favorites @user.id
     end
   end
 
