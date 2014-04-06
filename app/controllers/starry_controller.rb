@@ -1,4 +1,7 @@
 class StarryController < ApplicationController
+  before_action :require_session
+  skip_before_action :require_session, only: [:index]
+
   TWITTER_RESULT_COUNT = 200.freeze
   def index
     puts 'hi'
@@ -63,6 +66,13 @@ class StarryController < ApplicationController
   end
 
   private
+
+  def require_session
+    if not session[:user_id]
+      flash[:warning] = "Please login first."
+      redirect_to root_path
+    end
+  end
 
   def get_new_favorites(favorites)
     favorites.each_with_index do |fave, i|
