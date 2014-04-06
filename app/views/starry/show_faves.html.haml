@@ -2,11 +2,4 @@
   Favorites (#{@faves.length})
 
 - @faves.each do |fave|
-  - username = JSON.parse(fave.raw_data)['user']['screen_name']
-  %div
-    %blockquote(class='twitter-tweet' lang='en')
-      %p
-        #{fave.text}
-      %a(href="https://twitter.com/#{username}/status/#{fave.status_id}" target='_blank')
-        #{username} - View on Twitter
-/ %script(async=true src='http://platform.twitter.com/widgets.js' charset='utf-8')
+  = render :partial => 'layouts/fave', :object => fave
