@@ -50,6 +50,8 @@ class StarryController < ApplicationController
         FavoriteTweet.create_new_favorite favorite_data, session[:user_id]
       end
     end
+
+    redirect_to action: 'show_faves'
   end
 
   def show_faves
