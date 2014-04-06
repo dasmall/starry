@@ -12,43 +12,39 @@ class StarryController < ApplicationController
   end
 
   def get_faves
-    unless session[:user_id]
-      redirect_to root_url
-    else
 
-      @user = User.find_by id: session[:user_id]
-      client = setup_twitter_client
+    @user = User.find_by id: session[:user_id]
+    client = setup_twitter_client
 
-      last_id = nil
-      favorites = []
+    last_id = nil
+    favorites = []
 
-      i = 0
-      # Grab up to most recent 1000 favorites
-      for i in 0..5
-        search_options = setup_search_params(last_id)
-        results = client.favorites(search_options)
+    i = 0
+    # Grab up to most recent 1000 favorites
+    for i in 0..5
+      search_options = setup_search_params(last_id)
+      results = client.favorites(search_options)
 
-        new_favorites = get_new_favorites(results)
-        
-        favorites.concat new_favorites
+      new_favorites = get_new_favorites(results)
+      
+      favorites.concat new_favorites
 
-        # Duplicate favorites returned / No favorites returned.
-        # No need to request more.
-        if results.empty? or (new_favorites.length <= results.length)
-          break
-        end
-
-        i += 1
-        last_id = results.last.id
-
+      # Duplicate favorites returned / No favorites returned.
+      # No need to request more.
+      if results.empty? or (new_favorites.length <= results.length)
+        break
       end
 
-      # Reverse order for most recent tweet to be stored last
-      # to keep order in which it was given via API
-      favorites = favorites.reverse
-      favorites.each do |favorite_data|
-        FavoriteTweet.create_new_favorite favorite_data, session[:user_id]
-      end
+      i += 1
+      last_id = results.last.id
+
+    end
+
+    # Reverse order for most recent tweet to be stored last
+    # to keep order in which it was given via API
+    favorites = favorites.reverse
+    favorites.each do |favorite_data|
+      FavoriteTweet.create_new_favorite favorite_data, session[:user_id]
     end
 
     redirect_to action: 'show_faves'
