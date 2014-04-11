@@ -7,10 +7,11 @@ class SessionsController < ApplicationController
 
     unless @user
       @user = User.create_new_user(auth_data)
+      redirect_to favorites_mod_url(import_type: 'import')
+    else
+      redirect_to root_url
     end
-    
     session[:user_id] = @user.id
-    redirect_to root_url
   end
   
   def destroy

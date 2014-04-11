@@ -4,7 +4,6 @@ class StarryController < ApplicationController
 
   TWITTER_RESULT_COUNT = 200.freeze
   def index
-    puts 'hi'
     if session[:user_id]
       @user = User.find_by id: session[:user_id]
       @random_favorites = FavoriteTweet.random_favorites @user.id
@@ -21,8 +20,9 @@ class StarryController < ApplicationController
 
     i = 0
     # Grab up to most recent 1000 favorites
-    for i in 0..5
+    for i in 0..15
       search_options = setup_search_params(last_id)
+
       results = client.favorites(search_options)
 
       new_favorites = get_new_favorites(results)
@@ -55,12 +55,6 @@ class StarryController < ApplicationController
       @user = User.find_by id: session[:user_id]
     end
     @faves = FavoriteTweet.where(:user => @user.id).order(:date_posted => :desc)
-  end
-
-  def signin
-  end
-
-  def signout
   end
 
   private
@@ -99,12 +93,19 @@ class StarryController < ApplicationController
     }
     case params[:import_type]
     when 'import'
-      if not last_id_imported.nil?
+      if last_id_imported.nil?
         # queries with max_id return tweets up to
         # max_id including the max_id tweet.
         # subtract 1 to exclude max_id tweet.
+        earliest_fave = FavoriteTweet.where(user: session[:user_id]).order(:date_posted => :asc).limit(1)
+        if not earliest_fave.empty?
+          last_id_imported = earliest_fave[0].status_id.to_i - 1
+          search_options[:max_id] = last_id_imported
+        end
+      else
         search_options[:max_id] = last_id_imported - 1
       end
+
     when 'update'
       if not last_id_imported.nil?
         # queries with max_id return tweets up to
@@ -113,8 +114,11 @@ class StarryController < ApplicationController
         search_options[:max_id] = last_id_imported - 1
       else
         # Doesn't work for favorited tweets created prior to since_id
-        last_id_imported = FavoriteTweet.where(user: session[:user_id]).last.status_id.to_i
-        search_options[:since_id] = last_id_imported
+        last_fave = FavoriteTweet.where(user: session[:user_id]).last
+        if not last_fave
+          last_id_imported = last_fave.status_id.to_i
+          search_options[:since_id] = last_id_imported
+        end
       end
     end
     return search_options

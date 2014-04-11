@@ -1,15 +1,10 @@
 Starry::Application.routes.draw do
-  get "sessions/create"
-  get "sessions/destroy"
-  get "starry/index"
-  get "starry/signin"
-  get "starry/signout"
-
   root :to => 'starry#index'
 
   get 'auth/:provider/callback' => 'sessions#create'
   get 'favorites/' => 'starry#show_faves'
-  get 'favorites/:import_type' => 'starry#get_faves'
+  get 'favorites/:import_type' => 'starry#get_faves', as: 'favorites_mod'
+  get 'sessions/destroy' => 'sessions#destroy'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
