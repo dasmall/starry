@@ -1,5 +1,10 @@
 OmniAuth.config.logger = Rails.logger
 
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :twitter, ENV['TWITTER_API_KEY'], ENV['TWITTER_API_SECRET']
+  provider :twitter, ENV['TWITTER_API_KEY'], ENV['TWITTER_API_SECRET'],
+    {
+      :authorize_params => {
+        :force_login => 'true'
+      }
+    }
 end
