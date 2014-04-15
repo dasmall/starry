@@ -5,6 +5,8 @@ Starry::Application.routes.draw do
   get 'favorites/' => 'starry#show_faves'
   get 'favorites/:import_type' => 'starry#get_faves', as: 'favorites_mod'
   get 'sessions/destroy' => 'sessions#destroy'
+
+  resources :favorite_tweets
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

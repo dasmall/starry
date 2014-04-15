@@ -1,0 +1,10 @@
+= form_for @favorite_tweet do |f|
+  - if @favorite_tweet.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@favorite_tweet.errors.count, "error")} prohibited this favorite_tweet from being saved:"
+      %ul
+        - @favorite_tweet.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

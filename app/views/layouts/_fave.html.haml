@@ -5,3 +5,4 @@
       #{fave.text}
     %a(href="https://twitter.com/#{username}/status/#{fave.status_id}" target='_blank')
       #{username} - View on Twitter
+    = link_to 'Unfavorite', fave, method: 'delete', data: {confirm: 'Unfavorite this tweet?'}
