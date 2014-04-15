@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140404031037) do
+ActiveRecord::Schema.define(version: 20140415023817) do
+
+  create_table "favorite_categories", force: true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "favorite_categories", ["user_id"], name: "index_favorite_categories_on_user_id"
+
+  create_table "favorite_categories_favorite_tweets", id: false, force: true do |t|
+    t.integer "favorite_category_id", null: false
+    t.integer "favorite_tweet_id",    null: false
+  end
 
   create_table "favorite_tweets", force: true do |t|
     t.text     "text"
