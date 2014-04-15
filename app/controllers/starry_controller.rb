@@ -59,13 +59,6 @@ class StarryController < ApplicationController
 
   private
 
-  def require_session
-    if not session[:user_id]
-      flash[:warning] = "Please login first."
-      redirect_to root_path
-    end
-  end
-
   def get_new_favorites(favorites)
     favorites.each_with_index do |fave, i|
       existing_favorite = FavoriteTweet.find_by status_id: fave.id
@@ -76,15 +69,6 @@ class StarryController < ApplicationController
       end
     end
     return favorites
-  end
-
-  def setup_twitter_client
-    client = Twitter::REST::Client.new do |config|
-      config.consumer_key        = ENV['TWITTER_API_KEY']
-      config.consumer_secret     = ENV['TWITTER_API_SECRET']
-      config.access_token        = @user.access_token
-      config.access_token_secret = @user.access_token_secret
-    end
   end
 
   def setup_search_params(last_id_imported=nil)
