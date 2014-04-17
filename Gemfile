@@ -32,6 +32,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'foreman'
 gem 'less-rails'
 gem 'therubyracer'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
