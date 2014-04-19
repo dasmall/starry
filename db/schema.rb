@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140419021137) do
+ActiveRecord::Schema.define(version: 20140419022158) do
 
   create_table "favorite_categories", force: true do |t|
     t.string   "name"
@@ -29,13 +29,13 @@ ActiveRecord::Schema.define(version: 20140419021137) do
 
   create_table "favorite_tweets", force: true do |t|
     t.text     "text"
-    t.string   "status_id"
     t.datetime "date_posted"
     t.integer  "user_id",        limit: 255
     t.text     "raw_data"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "favorite_count"
+    t.integer  "status_id"
   end
 
   create_table "favorites", force: true do |t|
