@@ -42,6 +42,7 @@ gem 'twitter', '5.0.0.rc.1'
 gem 'omniauth-twitter'
 gem 'sidekiq'
 gem 'pg'
+gem 'bugsnag'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
