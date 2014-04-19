@@ -1,5 +1,6 @@
 class ChangeUserIdColumnInFavoriteTweet < ActiveRecord::Migration
   def change
-    change_column :favorite_tweets, :user_id, :integer
+    remove_column :favorite_tweets, :user_id
+    add_column :favorite_tweets, :user_id, :integer
   end
 end
