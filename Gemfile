@@ -40,6 +40,7 @@ gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootst
 gem 'haml-rails'
 gem 'twitter', '5.0.0.rc.1'
 gem 'omniauth-twitter'
+gem 'sidekiq'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
