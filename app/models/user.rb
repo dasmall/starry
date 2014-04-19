@@ -12,4 +12,12 @@ class User < ActiveRecord::Base
     @user.save
     @user
   end
+
+  def create_new_favorite(tweet)
+    FavoriteTweet.create_new_favorite tweet, id
+  end
+
+  def random_favorites(count=3)
+    favorite_tweets.order('RANDOM()').limit count
+  end
 end

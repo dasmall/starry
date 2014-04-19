@@ -26,7 +26,7 @@ class TwitterSyncWorker
     # to keep order in which it was given via API
     favorites = favorites.reverse
     favorites.each do |favorite_data|
-      FavoriteTweet.create_new_favorite favorite_data, @user.id
+      @user.create_new_favorite favorite_data
     end
   end
 
@@ -51,8 +51,8 @@ class TwitterSyncWorker
         # queries with max_id return tweets up to
         # max_id including the max_id tweet.
         # subtract 1 to exclude max_id tweet.
-        earliest_fave = @user.favorite_tweets.order(date_posted: :asc).limit(1)
-        if not earliest_fave.empty?
+        earliest_fave = @user.favorite_tweets.oldest.first
+        if earliest_fave
           last_id_imported = earliest_fave[0].status_id.to_i - 1
           search_options[:max_id] = last_id_imported
         end
@@ -68,8 +68,8 @@ class TwitterSyncWorker
         search_options[:max_id] = last_id_imported - 1
       else
         # Doesn't work for favorited tweets created prior to since_id
-        last_fave = FavoriteTweet.where(user: @user.id).last
-        if not last_fave
+        last_fave = @user.favorite_tweets.recent.first
+        if last_fave
           last_id_imported = last_fave.status_id.to_i
           search_options[:since_id] = last_id_imported
         end
@@ -81,7 +81,7 @@ class TwitterSyncWorker
 
   def get_new_favorites(favorites)
     favorites.each_with_index do |fave, i|
-      existing_favorite = FavoriteTweet.find_by status_id: fave.id
+      existing_favorite = @user.favorite_tweets.find_by status_id: fave.id
       if existing_favorite
         # Return only array of new favorites.
         return new_favorites = favorites.slice(0, i)

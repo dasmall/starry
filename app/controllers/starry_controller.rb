@@ -5,7 +5,7 @@ class StarryController < ApplicationController
   def index
     if session[:user_id]
       @user = User.find_by id: session[:user_id]
-      @random_favorites = FavoriteTweet.random_favorites @user.id
+      @random_favorites = @user.random_favorites
     end
   end
 
@@ -20,6 +20,6 @@ class StarryController < ApplicationController
     if session[:user_id]
       @user = User.find_by id: session[:user_id]
     end
-    @faves = FavoriteTweet.where(:user => @user.id).order(:date_posted => :desc)
+    @faves = @user.favorite_tweets.recent
   end
 end
