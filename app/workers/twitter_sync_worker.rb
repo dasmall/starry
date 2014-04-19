@@ -51,7 +51,7 @@ class TwitterSyncWorker
         # queries with max_id return tweets up to
         # max_id including the max_id tweet.
         # subtract 1 to exclude max_id tweet.
-        earliest_fave = FavoriteTweet.where(user: @user.id).order(date_posted: :asc).limit(1)
+        earliest_fave = @user.favorite_tweets.order(date_posted: :asc).limit(1)
         if not earliest_fave.empty?
           last_id_imported = earliest_fave[0].status_id.to_i - 1
           search_options[:max_id] = last_id_imported

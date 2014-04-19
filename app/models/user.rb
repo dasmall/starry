@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_many :favorite_tweets, dependent: :destroy
+
   def self.create_new_user(auth_data)
     @user = User.new(
       :uid => auth_data.uid,
