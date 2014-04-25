@@ -30,12 +30,12 @@ ActiveRecord::Schema.define(version: 20140419022158) do
   create_table "favorite_tweets", force: true do |t|
     t.text     "text"
     t.datetime "date_posted"
-    t.integer  "user_id",        limit: 255
     t.text     "raw_data"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "favorite_count"
-    t.integer  "status_id"
+    t.integer  "user_id"
+    t.integer  "status_id",      limit: 8
   end
 
   create_table "favorites", force: true do |t|
