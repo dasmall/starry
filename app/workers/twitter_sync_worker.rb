@@ -17,7 +17,7 @@ class TwitterSyncWorker
       # Duplicate favorites returned / No favorites returned.
       # No need to request more.
 
-        break if results.empty? or (new_favorites.length <= results.length)
+      break if results.empty? or (new_favorites.length < results.length)
 
       last_id = results.last.id
     end
