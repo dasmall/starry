@@ -30,6 +30,12 @@ class TwitterSyncWorker
     end
   end
 
+  def delete(user_id, tweet_id)
+    @user = User.find user_id
+    @favorite_tweet = FavoriteTweet.find(tweet_id)
+    twitter_client.unfavorite([@favorite_tweet.status_id.to_i])
+  end
+
   private
 
   def twitter_client

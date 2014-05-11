@@ -54,8 +54,7 @@ class FavoriteTweetsController < ApplicationController
   # DELETE /favorite_tweets/1
   # DELETE /favorite_tweets/1.json
   def destroy
-    client = setup_twitter_client
-    result = client.unfavorite([@favorite_tweet.status_id.to_i])
+    TwitterSyncWorker.new.delete(session[:user_id], @favorite_tweet.id)
     @favorite_tweet.destroy
     respond_to do |format|
       format.html { redirect_to request.referer }

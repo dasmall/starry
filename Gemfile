@@ -43,6 +43,11 @@ gem 'omniauth-twitter'
 gem 'sidekiq'
 gem 'pg'
 gem 'bugsnag'
+gem 'acts_as_taggable_on'
+
+group :development do
+  gem 'pry-rails'
+end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
