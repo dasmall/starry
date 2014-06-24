@@ -59,7 +59,7 @@ class TwitterSyncWorker
         # subtract 1 to exclude max_id tweet.
         earliest_fave = @user.favorite_tweets.oldest.first
         if earliest_fave
-          last_id_imported = earliest_fave[0].status_id.to_i - 1
+          last_id_imported = earliest_fave.status_id.to_i - 1
           search_options[:max_id] = last_id_imported
         end
       else
