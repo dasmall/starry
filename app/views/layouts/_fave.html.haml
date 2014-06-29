@@ -25,9 +25,10 @@
                 = hidden_field_tag 'favorite_tweet_id', fave.id
                 = submit_tag 'Add'
 
-          %li( role="presentation ")
-            %a( role="menuitem")
-              Test
-          %li( role="presentation ")
-            %a( role="menuitem")
-              Test
+          - if @user.favorite_tweets.category_counts.empty?
+            (No Faves Stored)
+          -else
+            - @user.favorite_tweets.category_counts.each do |category|
+              %li
+                %a( role="menuitem")
+                  #{category.name}

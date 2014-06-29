@@ -2,6 +2,8 @@ class FavoriteTweet < ActiveRecord::Base
   belongs_to :user
   validates_uniqueness_of :status_id
   has_and_belongs_to_many :favorite_categories, join_table: :favorite_categories_favorite_tweets
+  acts_as_taggable
+  acts_as_taggable_on :category
 
   scope :oldest, -> { order date_posted: :asc }
   scope :recent, -> { order date_posted: :desc }
