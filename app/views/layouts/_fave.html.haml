@@ -1,10 +1,12 @@
 - username = JSON.parse(fave.raw_data)['user']['screen_name']
-%div
+- date = fave.date_posted.strftime("%m/%d/%Y @ %H:%M%p UTC")
+
+%div.tweet
   %blockquote(class='twitter-tweet' lang='en')
     %p
       #{fave.text}
     %a(href="https://twitter.com/#{username}/status/#{fave.status_id}" target='_blank')
-      #{username} - View on Twitter | #{fave.date_posted}
+      #{username} - View on Twitter | #{date}
     |
     = link_to 'Unfavorite', fave, method: 'delete', data: {confirm: 'Unfavorite this tweet?'}
     |

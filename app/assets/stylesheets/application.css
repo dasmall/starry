@@ -11,3 +11,10 @@
  *= require_self
  *= require_tree .
  */
+
+.tweet{
+  column-break-inside: avoid;
+  display: inline-block;
+  /*float: left;*/
+  width: 370px;
+}
