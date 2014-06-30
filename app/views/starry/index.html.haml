@@ -1,7 +1,10 @@
 -if @user
   - if defined? @random_favorites and @random_favorites.length
-    - @random_favorites.each do |fave|
-      = render :partial => 'layouts/fave', :object => fave
+    %h2
+      Random Favorites
+    .tweets
+      - @random_favorites.each do |fave|
+        = render :partial => 'layouts/fave', :object => fave
   - else
     %p
       Get to starring some tweets and we'll show you some here!

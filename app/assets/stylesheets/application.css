@@ -13,9 +13,7 @@
  */
 
 .tweet{
-  column-break-inside: avoid;
   display: inline-block;
-  /*float: left;*/
   width: 370px;
 }
 
@@ -25,4 +23,16 @@
 
 .dropdown li.tags form{
   display: none;
+}
+
+@media(max-width: 370px){
+  .tweet{
+    width: 90%;
+  }
+}
+
+@media(min-width: 370px and max-width: 740px){
+  .tweet{
+    width: 50%;
+  }
 }
