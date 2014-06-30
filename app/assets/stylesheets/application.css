@@ -18,3 +18,11 @@
   /*float: left;*/
   width: 370px;
 }
+
+.dropdown li.tags input[type="submit"]{
+  display: none;
+}
+
+.dropdown li.tags form{
+  display: none;
+}

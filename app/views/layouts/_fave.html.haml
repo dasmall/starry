@@ -1,7 +1,7 @@
 - username = JSON.parse(fave.raw_data)['user']['screen_name']
 - date = fave.date_posted.strftime("%m/%d/%Y @ %H:%M%p UTC")
 
-%div.tweet
+%div.tweet( data-id="#{fave.id}" )
   %blockquote(class='twitter-tweet' lang='en')
     %p
       #{fave.text}
@@ -11,24 +11,35 @@
     = link_to 'Unfavorite', fave, method: 'delete', data: {confirm: 'Unfavorite this tweet?'}
     |
     %span
-      .dropdown(href="")
+      .dropdown.tags
         %div.dropdown-toggle(data-toggle="dropdown")
           Tags
+          %span.caret
         %ul.dropdown-menu(role="menu")
-          %li( role="presentation")
+          %li( role="presentation" class="tag-form")
             %a(role="divider")
               Tags
-          %li
             .new-tag.area
               = form_tag 'tags/', remote: true do
-                = text_field_tag 'tag[name]'
+                = text_field_tag 'category[name]'
                 = hidden_field_tag 'favorite_tweet_id', fave.id
                 = submit_tag 'Add'
+          %li( role="presentation" class="divider" )
 
           - if @user.favorite_tweets.category_counts.empty?
             (No Faves Stored)
           -else
             - @user.favorite_tweets.category_counts.each do |category|
-              %li
+              %li.tags( data-category-id="#{category.id}" )
+                = form_tag 'tags/update', remote: true do
+                  = hidden_field_tag 'favorite_tweet_id', fave.id
+                  = hidden_field_tag 'category[name]', category.name
+                  = hidden_field_tag 'category[id]', category.id
+                  = submit_tag 'update'
                 %a( role="menuitem")
-                  #{category.name}
+                  - if fave.category_list.include? category.name
+                    %i.fa.fa-circle
+                  - else
+                    %i.fa.fa-circle-o
+                  %span.category
+                    #{category.name}
