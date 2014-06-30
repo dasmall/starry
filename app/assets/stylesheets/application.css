@@ -25,13 +25,13 @@
   display: none;
 }
 
-@media(max-width: 370px){
+@media (max-width: 370px){
   .tweet{
     width: 90%;
   }
 }
 
-@media(min-width: 370px and max-width: 740px){
+@media (min-width: 370px) and (max-width: 740px){
   .tweet{
     width: 50%;
   }
