@@ -35,9 +35,10 @@ end
 gem 'foreman'
 gem 'less-rails'
 gem 'therubyracer'
-gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'twitter-bootstrap-rails'
 
 gem 'haml-rails'
+gem 'http_parser.rb', '0.5.0'
 gem 'twitter', '5.0.0.rc.1'
 gem 'omniauth-twitter'
 gem 'sidekiq'
