@@ -13,28 +13,3 @@
  *= require bootstrap_and_overrides
  *= require font-awesome
  */
-
-.tweet{
-  display: inline-block;
-  width: 370px;
-}
-
-.dropdown li.tags input[type="submit"]{
-  display: none;
-}
-
-.dropdown li.tags form{
-  display: none;
-}
-
-@media (max-width: 370px){
-  .tweet{
-    width: 90%;
-  }
-}
-
-@media (min-width: 370px) and (max-width: 740px){
-  .tweet{
-    width: 50%;
-  }
-}

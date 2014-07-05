@@ -8,9 +8,9 @@
   <meta name="viewport" content="width=device-width">
 </head>
 <body>
+  <%= render :partial => 'layouts/nav' %>
   <div class="container">
     <div class="row">
-      <%= render :partial => 'layouts/nav' %>
       <%= render :partial => 'layouts/messages' %>
       <%= yield %>
     </div>

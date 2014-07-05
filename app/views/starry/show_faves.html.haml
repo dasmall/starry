@@ -1,5 +1,14 @@
-%h1
-  Favorites (#{@faves.length})
+.category
+  %h1
+    Recent, Uncategorized Favorites (#{@faves_without_categories.length})
 
-- @faves.each do |fave|
-  = render :partial => 'layouts/fave', :object => fave
+  .tweets.index.category
+    - @faves_without_categories.each do |fave|
+      = render :partial => 'layouts/fave', :object => fave
+- @categories.each do |category|
+  .category
+    %h1
+      #{category[:name]} (#{category[:tweets].length})
+  .tweets.category
+    - category[:tweets].each do |fave|
+      = render :partial => 'layouts/fave', :object => fave

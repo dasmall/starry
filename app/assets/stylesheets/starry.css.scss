@@ -1,3 +1,30 @@
 // Place all the styles related to the starry controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.tweet{
+  display: inline-block;
+  width: 370px;
+  .dropdown-menu{
+    max-height: 170px;
+    overflow: scroll;
+  }
+}
+
+.dropdown{
+  li.tags{
+    input[type="submit"]{
+      display: none;
+    }
+    form{
+      display: none;
+    }
+  }
+}
+
+.category{
+  .tweets{
+    max-height: 300px;
+    overflow: scroll;
+  }
+}

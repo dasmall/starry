@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 bind_category_listeners = () ->
-  $('.tweet .tags.dropdown li a').on('click', update_tweet_category)
+  $('.tweet .tags.dropdown li a').not('[role=divider]').on('click', update_tweet_category)
   return
 
 bind_category_form_response_listeners = () ->

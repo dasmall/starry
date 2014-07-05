@@ -18,7 +18,7 @@
       %ul.dropdown-menu(role="menu")
         %li( role="presentation" class="tag-form")
           %a(role="divider")
-            Tags
+            New Tag
           .new-tag.area
             = form_tag 'tags/', remote: true do
               = text_field_tag 'category[name]'
@@ -29,7 +29,7 @@
         - if @user.favorite_tweets.category_counts.empty?
           (No Faves Stored)
         -else
-          - @user.favorite_tweets.category_counts.each do |category|
+          - @user.favorite_tweets.category_counts.sort {|cat1,cat2| cat1.name <=> cat2.name }.each do |category|
             %li.tags( data-category-id="#{category.id}" )
               = form_tag 'tags/update', remote: true do
                 = hidden_field_tag 'favorite_tweet_id', fave.id
