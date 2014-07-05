@@ -13,7 +13,7 @@
     .dropdown.tags
       %div.dropdown-toggle(data-toggle="dropdown")
         %h4 
-          Tags
+          Categories
           %span.caret
       %ul.dropdown-menu(role="menu")
         %li( role="presentation" class="tag-form")
@@ -27,7 +27,7 @@
         %li( role="presentation" class="divider" )
 
         - if @user.favorite_tweets.category_counts.empty?
-          (No Faves Stored)
+          (No Categories Stored)
         -else
           - @user.favorite_tweets.category_counts.sort {|cat1,cat2| cat1.name <=> cat2.name }.each do |category|
             %li.tags( data-category-id="#{category.id}" )
