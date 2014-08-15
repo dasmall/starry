@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
     if not session[:user_id]
       flash[:warning] = "Please login first."
       redirect_to root_path
+    else
+      @user = User.find_by id: session[:user_id]
     end
   end
 end

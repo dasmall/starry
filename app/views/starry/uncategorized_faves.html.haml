@@ -1,0 +1,7 @@
+.category
+  %h1
+    Uncategorized Favorites (#{@uncategorized_faves.length})
+
+  .tweets.category
+    - @faves.each do |fave|
+      = render :partial => 'layouts/fave', :object => fave

@@ -1,0 +1,6 @@
+.category
+  %h1
+    #{params[:category]}
+  .tweets.category
+    - @faves.each do |fave|
+      = render :partial => 'layouts/fave', :object => fave

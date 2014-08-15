@@ -3,7 +3,8 @@ Starry::Application.routes.draw do
 
   get 'auth/:provider/callback' => 'sessions#create'
   get 'favorites/' => 'starry#show_faves'
-  # resource :favorites, only: 
+  get 'favorites/c/uncategorized' => 'starry#uncategorized_faves'
+  get 'favorites/c/:category' => 'starry#get_category_faves'
   get 'favorites/:import_type' => 'starry#get_faves', as: 'favorites_mod'
   get 'sessions/destroy' => 'sessions#destroy'
 

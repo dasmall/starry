@@ -1,6 +1,6 @@
 .category
   %h1
-    Uncategorized Favorites (#{@faves_without_categories.length})
+    = link_to('Uncategorized Favorites', {controller: 'starry', action:'uncategorized_faves'})
 
   .tweets.index.category
     - @faves_without_categories.each do |fave|
@@ -8,7 +8,7 @@
 - @categories.each do |category|
   .category
     %h1
-      #{category[:name]} (#{category[:tweets].length})
+      =link_to(category[:name],  "/favorites/c/#{category[:name]}")
   .tweets.category
     - category[:tweets].each do |fave|
       = render :partial => 'layouts/fave', :object => fave
